@@ -28,6 +28,7 @@ jobs:
       - image: circleci/node:13.8.0
     
     steps:
+      - checkout
       - run: npm audit
 
 # Invoke jobs via workflows
@@ -37,8 +38,8 @@ workflows:
     jobs:
       - build
       - test:
-          - requires:
-              - build
+          requires:
+            - build
       - analyze:
-          - requires:
-              - test
+          requires:
+            - test
